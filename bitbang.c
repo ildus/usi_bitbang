@@ -29,11 +29,10 @@
 static unsigned char
 bitbang_txrx(IOCtrl *ctrl, unsigned char byte)
 {
-	int i;
 	unsigned char r, b, rbyte;
 
 	rbyte = 0;
-	for (i=7; i>=0; i--)
+	for (int i=7; i>=0; i--)
 	{
 		/*
 		* Write and read one bit on SPI.
@@ -52,18 +51,18 @@ bitbang_txrx(IOCtrl *ctrl, unsigned char byte)
 		* So programming works safely down to 1MHz target clock.
 		*/
 
-    		b = (byte >> i) & 0x01;
+		b = (byte >> i) & 0x01;
 
 		/* set the data input line as desired */
-		ctrl->setpin(ctrl, ctrl->pins[MOSI], b);
-		ctrl->setpin(ctrl, ctrl->pins[SCK], 1);
+		ctrl->setpin(ctrl, PIN_MOSI, b);
+		ctrl->setpin(ctrl, PIN_SCK, 1);
 
 		/*
 		* read the result bit (it is either valid from a previous falling
 		* edge or it is ignored in the current context)
 		*/
-		r = ctrl->getpin(pgm, ctrl->pins[MISO]);
-		ctrl->setpin(pgm, ctrl->pins[SCK], 0);
+		r = ctrl->getpin(ctrl, PIN_MISO);
+		ctrl->setpin(ctrl, PIN_SCK, 0);
 		rbyte |= r << i;
 	}
 
@@ -81,8 +80,7 @@ bitbang_cmd(IOCtrl *ctrl, const unsigned char *cmd, unsigned char *res)
 	int i;
 
 	for (i=0; i<4; i++)
-		res[i] = bitbang_txrx(pgm, cmd[i]);
+		res[i] = bitbang_txrx(ctrl, cmd[i]);
 
 	return 0;
 }
-
