@@ -145,7 +145,7 @@ static int linuxgpio_fds[N_GPIO] ;
 static int linuxgpio_setpin(IOCtrl *ctrl, int pinfunc, int value)
 {
 	int r,
-		pin = ctrl->pinno[pinfunc];
+	    pin = ctrl->pinno[pinfunc];
 
 	if (pin & PIN_INVERSE)
 	{
@@ -213,10 +213,6 @@ static int linuxgpio_open(IOCtrl *ctrl, char *port)
 {
 	int r, i, pin;
 
-	if (bitbang_check_prerequisites(ctrl) < 0)
-		return -1;
-
-
 	for (i=0; i<N_GPIO; i++)
 		linuxgpio_fds[i] = -1;
 	//Avrdude assumes that if a pin number is 0 it means not used/available
@@ -238,7 +234,7 @@ static int linuxgpio_open(IOCtrl *ctrl, char *port)
 			if ((r=linuxgpio_export(pin)) < 0)
 			{
 				error(1, errno, "Can't export GPIO %d, already exported/busy?: %s",
-				                pin, strerror(errno));
+				      pin, strerror(errno));
 				return r;
 			}
 			if (i == PIN_MISO)
