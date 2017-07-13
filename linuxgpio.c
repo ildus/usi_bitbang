@@ -272,6 +272,9 @@ static void linuxgpio_close(IOCtrl *ctrl)
 
 void linuxgpio_init(IOCtrl *ctrl)
 {
+	ctrl->pinno[PIN_SCK]		= 11;
+	ctrl->pinno[PIN_MISO]		= 9;
+	ctrl->pinno[PIN_MOSI]		= 10;
 	ctrl->cmd			= bitbang_cmd;
 	ctrl->open			= linuxgpio_open;
 	ctrl->close			= linuxgpio_close;

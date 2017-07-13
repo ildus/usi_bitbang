@@ -2,7 +2,7 @@ CC = gcc
 DEPS = linuxgpio.h bitbang.h
 OBJ = linuxgpio.o bitbang.o controller.o
 SRC = linuxgpio.c bitbang.c controller.c
-CFLAGS = -I.
+CFLAGS = -I. -std=gnu11 -g3 -O0
 
 %.o: %.c $(DEPS)
 	$(CC) -c -o $@ $< $(CFLAGS)

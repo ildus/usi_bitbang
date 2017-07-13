@@ -11,7 +11,7 @@ enum PINFUNC
 
 typedef struct ioctrl_t
 {
-	enum PINFUNC pinno[3];
+	enum PINFUNC pinno[N_PINS];
 	int  (*open)           (struct ioctrl_t *ctrl);
 	void (*close)          (struct ioctrl_t *ctrl);
 	int  (*setpin)         (struct ioctrl_t *ctrl, int pinfunc, int value);
