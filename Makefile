@@ -1,14 +1,17 @@
-CC = avr-gcc
+CC = gcc
 DEPS = linuxgpio.h bitbang.h
-OBJ = linuxgpio.o bitbang.o
-SRC = linuxgpio.c bitbang.c
+OBJ = linuxgpio.o bitbang.o controller.o
+SRC = linuxgpio.c bitbang.c controller.c
 CFLAGS = -I.
 
 %.o: %.c $(DEPS)
 	$(CC) -c -o $@ $< $(CFLAGS)
 
-all: $(OBJ)
+controller: $(OBJ)
 	$(CC) -o $@ $^ $(CFLAGS)
 
-format: $(SRC)
-	astyle $@ --style=bsd --indent=tab
+format: $(SRC) $(DEPS)
+	astyle $^ --style=bsd --indent=tab
+
+clean:
+	rm -f *.o *~ *.c.orig

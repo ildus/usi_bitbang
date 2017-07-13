@@ -209,7 +209,7 @@ static int linuxgpio_highpulsepin(IOCtrl * ctrl, int pinfunc)
 	return 0;
 }
 
-static int linuxgpio_open(IOCtrl *ctrl, char *port)
+static int linuxgpio_open(IOCtrl *ctrl)
 {
 	int r, i, pin;
 
