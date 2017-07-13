@@ -14,4 +14,4 @@ format: $(SRC) $(DEPS)
 	astyle $^ --style=bsd --indent=tab
 
 clean:
-	rm -f *.o *~ *.c.orig
+	rm -f *.o *~ *.c.orig *.orig
