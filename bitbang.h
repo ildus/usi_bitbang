@@ -22,5 +22,6 @@ typedef struct ioctrl_t
 } IOCtrl;
 
 int bitbang_cmd(IOCtrl *ctrl, const unsigned char *cmd, unsigned char *res);
+void bitbang_init(IOCtrl *ctrl);
 
 #endif

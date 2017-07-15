@@ -281,4 +281,6 @@ void linuxgpio_init(IOCtrl *ctrl)
 	ctrl->setpin		= linuxgpio_setpin;
 	ctrl->getpin		= linuxgpio_getpin;
 	ctrl->highpulsepin	= linuxgpio_highpulsepin;
+
+	bitbang_init(ctrl);
 }

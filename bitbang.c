@@ -69,6 +69,12 @@ bitbang_txrx(IOCtrl *ctrl, unsigned char byte)
 	return rbyte;
 }
 
+void
+bitbang_init(IOCtrl *ctrl)
+{
+	ctrl->setpin(ctrl, PIN_SCK, 0);
+}
+
 
 /*
  * transmit an AVR device command and return the results; 'cmd' and
